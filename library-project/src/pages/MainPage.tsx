@@ -1,9 +1,23 @@
 // src/pages/MainPage.tsx
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useStore from '../store/Store';
 
 const MainPage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  //@ts-ignore
+  const searchBooks = useStore((state) => state.searchBooks);
+  const navigate = useNavigate();
+
+  //@ts-ignore
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    await searchBooks(searchTerm);
+    navigate('/books');
+  };
+
   return (
-    <div className="min-h-screen w-screen overflow-hidden flex flex-col">
+    <div className="min-h-screen w-screen flex flex-col">
       {/* Header with Navbar */}
       <header className="bg-gray-800 text-white py-4 shadow-md w-screen">
         <nav className="flex justify-between items-center px-8 py-4">
@@ -13,6 +27,22 @@ const MainPage = () => {
             <li><a href="#location" className="hover:text-gray-300">Location</a></li>
             <li><a href="#contact" className="hover:text-gray-300">Contact</a></li>
           </ul>
+          {/* Search Input and Button */}
+          <form onSubmit={handleSearch} className="flex">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search for a book..."
+              className="px-4 py-2 rounded-l bg-white text-black focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white rounded-r hover:bg-blue-600"
+            >
+              Search
+            </button>
+          </form>
         </nav>
       </header>
 
@@ -32,7 +62,7 @@ const MainPage = () => {
         <div className="text-center px-6">
           <h3 className="text-3xl font-bold mb-8">Location & Information</h3>
           <p className="max-w-2xl mx-auto mb-6">
-            We are located in the heart of the city, offering a variety of books across genres. Our facilities include reading areas, computer access, and community events to foster learning and connection.
+            We are located in the heart of Baakline, offering a variety of books across genres. Our facilities include reading areas, computer access, and community events to foster learning and connection.
           </p>
         </div>
       </section>
@@ -55,7 +85,7 @@ const MainPage = () => {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-6 w-screen">
         <div className="text-center">
-          <p>&copy; 2023 Library Project. All Rights Reserved.</p>
+          <p>&copy; 2024 Library Project. All Rights Reserved.</p>
         </div>
       </footer>
     </div>
