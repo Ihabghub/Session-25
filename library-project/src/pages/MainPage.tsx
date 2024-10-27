@@ -22,18 +22,14 @@ const MainPage = () => {
       <header className="bg-gray-800 text-white py-4 shadow-md w-screen">
         <nav className="flex justify-between items-center px-8 py-4">
           <h1 className="text-2xl font-bold">My Library</h1>
-          <ul className="flex space-x-6">
-            <li><a href="/" className="hover:text-gray-300">Home</a></li>
-            <li><a href="#location" className="hover:text-gray-300">Location</a></li>
-            <li><a href="#contact" className="hover:text-gray-300">Contact</a></li>
-          </ul>
-          {/* Search Input and Button */}
-          <form onSubmit={handleSearch} className="flex">
+          
+          {/* Centered Search Input and Button */}
+          <form onSubmit={handleSearch} className="flex justify-center items-center flex-grow">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search for a book..."
+              placeholder="Search for a book or author..."
               className="px-4 py-2 rounded-l bg-white text-black focus:outline-none"
             />
             <button
@@ -43,6 +39,13 @@ const MainPage = () => {
               Search
             </button>
           </form>
+          
+          {/* Navigation Links */}
+          <ul className="flex space-x-6 ml-4">
+            <li><a href="/" className="hover:text-gray-300">Home</a></li>
+            <li><a href="#location" className="hover:text-gray-300">Location</a></li>
+            <li><a href="#contact" className="hover:text-gray-300">Contact</a></li>
+          </ul>
         </nav>
       </header>
 
